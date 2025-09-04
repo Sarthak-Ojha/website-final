@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Performance optimizations -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="color-scheme" content="light dark">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Performance hints -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <title>Sarthak Ojha | Full-Stack Developer</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Sarthak Ojha - Guinness World Record holder and award-winning full-stack developer from Nepal, creating innovative web applications and mobile apps with modern technologies.">
+    <meta name="keywords" content="full-stack developer, web developer, mobile app developer, Nepal, JavaScript, Python, Flutter, React, portfolio">
+    <meta name="author" content="Sarthak Ojha">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Sarthak Ojha | Full-Stack Developer">
+    <meta property="og:description" content="Award-winning full-stack developer from Nepal creating innovative digital solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sarthak-ojha-portfolio.netlify.app">
+    <meta property="og:site_name" content="Sarthak Ojha Portfolio">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sarthak Ojha | Full-Stack Developer">
+    <meta name="twitter:description" content="Award-winning full-stack developer creating innovative digital solutions.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sarthak Ojha",
+        "jobTitle": "Full-Stack Developer",
+        "description": "Award-winning full-stack developer from Nepal specializing in web development, mobile applications, and innovative digital solutions.",
+        "email": "sarthakojha.works@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Nepal"
+        },
+        "knowsAbout": ["Full-Stack Development", "Web Development", "Mobile App Development", "JavaScript", "Python", "React", "Flutter", "Digital Marketing", "Microsoft AI"],
+        "sameAs": [
+            "https://github.com/Sarthak-Ojha",
+            "https://linkedin.com/in/sarthak-ojha"
+        ],
+        "award": ["Guinness World Record - Microsoft AI Skills Fest", "Certified Developer"]
+    }
+    </script>
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    
+    <!-- Critical CSS inline for faster rendering -->
+    <style>
+        /* Critical above-the-fold styles */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Inter,sans-serif;line-height:1.6;color:#1a1a1a;background:#fff}
+        .header{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);transition:all 0.3s ease}
+        .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#f8fafc 0%,#e0f2fe 100%)}
+    </style>
+    
+    <!-- Fonts with fallback -->
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    
+    <!-- Icons -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js" as="script">
+    
+    <!-- CSS -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Modern Navigation Header -->
+    <header class="header" role="banner">
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <a href="#home" class="nav-logo" aria-label="Sarthak Ojha - Home">
+                    <span class="logo-name">Sarthak Ojha</span>
+                </a>
+                
+                <ul class="nav-menu" role="menubar">
+                    <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                    <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+                    <li><a href="#credentials" class="nav-link" data-section="credentials">Credentials</a></li>
+                    <li><a href="#contact" class="nav-link" data-section="contact">Contact Me</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main" role="main">
+        <!-- Modern Hero Section -->
+        <section id="home" class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-left">
+                        <div class="hero-greeting">
+                            <p class="greeting-text">Hi There,</p>
+                        </div>
+                        
+                        <div class="hero-title">
+                            <h1 id="hero-title" class="title-main">
+                                I am <span class="name-highlight">Sarthak</span>
+                            </h1>
+                        </div>
+                        
+                        <div class="hero-subtitle">
+                            <p class="subtitle-line1">I am Student during daytime</p>
+                            <p class="subtitle-line2">& sleeps during nights.</p>
+                        </div>
+                        
+                        
+                        <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>5+</h3>
+                                <p>Projects Done</p>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>3+</h3>
+                                <p>Years Learning</p>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>10+</h3>
+                                <p>Technologies</p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <div class="hero-right">
+                        <div class="hero-visual">
+                            <div class="large-letter">S</div>
+                            <div class="geometric-shapes">
+                                <div class="shape shape-circle"></div>
+                                <div class="shape shape-triangle"></div>
+                                <div class="shape shape-dots"></div>
+                            </div>
+                            <div class="profile-image">
+                                <img src="profile.png" alt="Sarthak Ojha" loading="lazy" onload="this.nextElementSibling.style.display='none'" style="pointer-events: none; user-select: none;">
+                                <div class="profile-placeholder">
+                                    <i data-lucide="user"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-header">
+                <h2 class="about-title-main">About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-left">
+                    <h2 class="about-title">
+                        Turning Ideas Into 
+                        <span class="title-highlight">Digital Reality</span>
+                    </h2>
+                    
+                    <div class="about-intro">
+                        <p class="about-description highlight">
+                            I'm a passionate student developer with a love for creating meaningful digital experiences that make a difference.
+                        </p>
+                        
+                        <p class="about-description">
+                            My journey in technology spans across web development, mobile applications, and user interface design. I believe in the power of clean code, intuitive design, and innovative solutions.
+                        </p>
+                        
+                        <p class="about-description">
+                            When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.
+                        </p>
+                    </div>
+                    
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h4>Clean Code Advocate</h4>
+                                <p>Writing maintainable, scalable solutions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h4>Problem Solver</h4>
+                                <p>Turning complex challenges into simple solutions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h4>Team Player</h4>
+                                <p>Collaborating to build amazing products</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h4>World Record Holder</h4>
+                                <p>Guinness World Record - Microsoft AI</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    </div>
+                
+                <div class="about-right">
+                    <div class="skills-section">
+                        <div class="skills-header">
+                            <h3>Technical Skills</h3>
+                            <p>Technologies I work with daily</p>
+                        </div>
+                        
+                        <div class="skills-categories">
+                            <div class="skill-category">
+                                <h4>Frontend</h4>
+                                <div class="skills-row">
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fab fa-js-square"></i>
+                                        </div>
+                                        <span>JavaScript</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fab fa-dart-lang"></i>
+                                        </div>
+                                        <span>Dart</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fab fa-html5"></i>
+                                        </div>
+                                        <span>HTML5</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 95%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fab fa-css3-alt"></i>
+                                        </div>
+                                        <span>CSS3</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 88%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h4>Backend</h4>
+                                <div class="skills-row">
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fab fa-python"></i>
+                                        </div>
+                                        <span>Python</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fab fa-php"></i>
+                                        </div>
+                                        <span>PHP</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 70%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fas fa-database"></i>
+                                        </div>
+                                        <span>MySQL</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 82%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fas fa-fire"></i>
+                                        </div>
+                                        <span>Firebase</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fas fa-bolt"></i>
+                                        </div>
+                                        <span>Supabase</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 88%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h4>Tools & Design</h4>
+                                <div class="skills-row">
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fab fa-git-alt"></i>
+                                        </div>
+                                        <span>Git</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fab fa-figma"></i>
+                                        </div>
+                                        <span>Figma</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 78%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-icon">
+                                            <i class="fas fa-cube"></i>
+                                        </div>
+                                        <span>VirtualBox</span>
+                                        <div class="skill-level">
+                                            <div class="skill-progress" style="width: 70%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="projects-header">
+                <h2 class="projects-title">Featured Projects</h2>
+                <p class="projects-subtitle">Each project represents a unique challenge and learning opportunity</p>
+            </div>
+            <div class="projects-grid">
+        <div class="project-card featured">
+        <div class="project-image">
+            <img src="images/rental.png" alt="Vehicle Rental System Screenshot" class="project-thumbnail"/>
+            <div class="project-status">Featured</div>
+            <div class="project-overlay">
+                <div class="project-links">
+                    <a href="https://github.com/Sarthak-Ojha" class="project-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-content">
+            <div class="project-header">
+                <h3>Vehicle Rental System</h3>
+                <span class="project-type">Web Application</span>
+            </div>
+            <p class="project-description">
+                Comprehensive rental solution with real-time inventory management, payment processing, user authentication, and admin dashboard. Built with modern web technologies for scalability and performance.
+            </p>
+            <div class="project-features">
+                <span class="feature">Real-time Updates</span>
+                <span class="feature">Payment Gateway</span>
+                <span class="feature">Admin Dashboard</span>
+                <span class="feature">User Authentication</span>
+            </div>
+            <div class="project-tech">
+                <span class="tech-tag primary">PHP</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">JS</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-image">
+            <img src="images/gear.png" alt="Outer Gear Rental Website Screenshot" class="project-thumbnail"/>
+            <div class="project-overlay">
+                <div class="project-links">
+                    <a href="https://github.com/Sarthak-Ojha/Gear_rental_website" class="project-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="project-content">
+            <div class="project-header">
+                <h3>Outer Gear Rental Website </h3>
+                <span class="project-type">Educational Platform</span>
+            </div>
+            <p class="project-description">
+                Web-based platform for renting outdoor gear with user-friendly interface, secure payment options, and comprehensive gear management system. Ideal for adventure enthusiasts.
+            </p>
+            <div class="project-features">
+                <span class="feature">Renting items</span>
+                <span class="feature">Cart system</span>
+                <span class="feature">Instant Check-out</span>
+            </div>
+            <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">SQLite</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-image">
+            <img src="images/quiz.png" alt="Quiz Mobile App" class="project-thumbnail"/>
+            <div class="project-overlay">
+                <div class="project-links">
+                    <a href="https://github.com/Sarthak-Ojha/nepal_quiz_app" class="project-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="project-content">
+            <div class="project-header">
+                <h3>Quiz Mobile App</h3>
+                <span class="project-type">Mobile Application</span>
+            </div>
+            <p class="project-description">
+                Cross-platform quiz app with offline capabilities, progress tracking, and intuitive design for enhanced learning and assessment experience.
+            </p>
+            <div class="project-features">
+                <span class="feature">Offline Mode</span>
+                <span class="feature">Progress Tracking</span>
+                <span class="feature">Cross-platform</span>
+            </div>
+            <div class="project-tech">
+                <span class="tech-tag">Flutter</span>
+                <span class="tech-tag">Dart</span>
+                <span class="tech-tag">Firebase</span>
+            </div>
+        </div>
+        </div>
+
+         <div class="project-card">
+        <div class="project-image">
+            <img src="images/CS.png" alt="Quiz Mobile App Screenshot" class="project-thumbnail"/>
+            <div class="project-overlay">
+                <div class="project-links">
+                    <a href="#" class="project-link">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="project-content">
+            <div class="project-header">
+                <h3>Coming Soon</h3>
+                <span class="project-type">Coming Soon</span>
+            </div>
+            <p class="project-description">
+               Coming Soon
+            </p>
+            <div class="project-features">
+                <span class="feature">Coming Soon</span>
+                <span class="feature">Coming Soon</span>
+                <span class="feature">Coming Soon</span>
+            </div>
+            <div class="project-tech">
+                <span class="tech-tag">Coming Soon</span>
+                <span class="tech-tag">Coming Soon</span>
+                <span class="tech-tag">Coming Soon</span>
+            </div>
+        </div>
+        </div>
+         </div>
+         </div>
+    </section>
+
+    <!-- Credentials Section -->
+    <section id="credentials" class="credentials">
+        <div class="container">
+            <div class="credentials-header">
+                <h2 class="credentials-title">Credentials & Certifications</h2>
+            </div>
+
+            <div class="credentials-container">
+                <div class="credentials-track">
+                    <div class="credentials-set">
+                        <div class="credential-item">
+                            <img src="images/google.png" alt="Google">
+                            <h4>Google</h4>
+                            <p>Digital Marketing</p>
+                        </div>
+                        <div class="credential-item">
+                            <img src="images/microsoft.png" alt="Microsoft">
+                            <h4>Microsoft</h4>
+                            <p>AI Fundamentals</p>
+                        </div>
+                        <div class="credential-item">
+                            <img src="images/OU.png" alt="The Open University">
+                            <h4>Open University</h4>
+                            <p>Computer Science</p>
+                        </div>
+                        <div class="credential-item">
+                            <img src="images/iab.png" alt="IAB Europe">
+                            <h4>IAB Europe</h4>
+                            <p>Digital Advertising</p>
+                        </div>
+                    </div>
+                    <div class="credentials-set">
+                        <div class="credential-item">
+                            <img src="images/google.png" alt="Google">
+                            <h4>Google</h4>
+                            <p>Digital Marketing</p>
+                        </div>
+                        <div class="credential-item">
+                            <img src="images/microsoft.png" alt="Microsoft">
+                            <h4>Microsoft</h4>
+                            <p>AI Fundamentals</p>
+                        </div>
+                        <div class="credential-item">
+                            <img src="images/OU.png" alt="The Open University">
+                            <h4>Open University</h4>
+                            <p>Computer Science</p>
+                        </div>
+                        <div class="credential-item">
+                            <img src="images/iab.png" alt="IAB Europe">
+                            <h4>IAB Europe</h4>
+                            <p>Digital Advertising</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-header">
+                <h2 class="contact-title-main">Contact Me</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-left">
+                    <h2 class="contact-title">
+                        Let's Build Something 
+                        <span class="title-highlight">Amazing Together</span>
+                    </h2>
+                    
+                    <div class="contact-intro">
+                        <p class="contact-description highlight">
+                            I'm always excited to discuss new opportunities and collaborate on innovative projects that make a real impact.
+                        </p>
+                        
+                        <p class="contact-description">
+                            Whether you have a project in mind, need technical consultation, or just want to connect with a fellow developer, I'd love to hear from you.
+                        </p>
+                        
+                        <p class="contact-description">
+                            Let's turn your ideas into reality and create something extraordinary together.
+                        </p>
+                    </div>
+                    
+                    <div class="contact-highlights">
+                        <div class="contact-highlight-item">
+                            <div class="contact-highlight-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="contact-highlight-content">
+                                <h4>Quick Response</h4>
+                                <p>I'll get back to you within 24 hours</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-highlight-item">
+                            <div class="contact-highlight-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="contact-highlight-content">
+                                <h4>Collaborative Approach</h4>
+                                <p>Working together to achieve your goals</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-highlight-item">
+                            <div class="contact-highlight-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="contact-highlight-content">
+                                <h4>Quality Focused</h4>
+                                <p>Delivering excellence in every project</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Email Me</h4>
+                                <a href="mailto:sarthakojha.works@gmail.com">sarthakojha.works@gmail.com</a>
+                                <p class="method-note">Best for project inquiries</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Location</h4>
+                                <p>Kathmandu, Nepal</p>
+                                <p class="method-note">Available for remote work worldwide</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Availability</h4>
+                                <p>Sunday - Friday</p>
+                                <p class="method-note">9 AM - 6 PM (NPT)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-right">
+                    <div class="social-section">
+                        <div class="social-header">
+                            <h3>Connect With Me</h3>
+                            <p>Follow my journey and latest updates</p>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="https://github.com/Sarthak-Ojha" class="social-link github">
+                                <div class="social-icon">
+                                    <i class="fab fa-github"></i>
+                                </div>
+                                <div class="social-info">
+                                    <h4>GitHub</h4>
+                                    <p>Check out my repositories</p>
+                                    <span class="social-handle">@Sarthak-Ojha</span>
+                                </div>
+                                <div class="social-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.linkedin.com/in/sarthak-ojha/" class="social-link linkedin">
+                                <div class="social-icon">
+                                    <i class="fab fa-linkedin"></i>
+                                </div>
+                                <div class="social-info">
+                                    <h4>LinkedIn</h4>
+                                    <p>Professional networking</p>
+                                    <span class="social-handle">Sarthak Ojha</span>
+                                </div>
+                                <div class="social-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </a>
+                            
+                            <a href="#blog" class="social-link blog">
+                                <div class="social-icon">
+                                    <i class="fas fa-blog"></i>
+                                </div>
+                                <div class="social-info">
+                                    <h4>Blog</h4>
+                                    <p>Read my latest articles</p>
+                                    <span class="social-handle">Coming Soon</span>
+                                </div>
+                                <div class="social-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </a>
+                            
+                            <a href="mailto:sarthakojha.works@gmail.com" class="social-link email">
+                                <div class="social-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="social-info">
+                                    <h4>Email</h4>
+                                    <p>Send me a message</p>
+                                    <span class="social-handle">Direct Contact</span>
+                                </div>
+                                <div class="social-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Sarthak Ojha</h3>
+                    <p>&copy; 2025 All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Sarthak-Ojha">GitHub</a>
+                    <a href="https://www.linkedin.com/in/sarthak-ojha/">LinkedIn</a>
+                    <a href="mailto:sarthakojha.works@gmail.com">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Back to Top Button -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+    <span></span>
+</button>
+
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js" defer></script>
+    <script src="script.js" defer></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
