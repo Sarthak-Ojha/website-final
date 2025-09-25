@@ -1,3 +1,40 @@
+/* ===== MOBILE RESTRICTION ===== */
+/* Target only mobile phones, allow all iPads */
+@media only screen and (max-device-width: 1024px) and (hover: none) and (pointer: coarse) {
+    /* Special case for iPads - allow them */
+    @supports (-webkit-touch-callout: none) and (not (overflow: -webkit-marquee)) and (orientation: portrait) {
+        body::before {
+            display: none !important;
+        }
+        body > *:not(script) {
+            display: block !important;
+        }
+    }
+    body::before {
+        content: "🚫 Mobile phones are not supported. Please use an iPad, laptop, or desktop computer to view this website.";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f8f9fa;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        text-align: center;
+        z-index: 9999;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+    
+    body > *:not(script) {
+        display: none !important;
+    }
+}
+
 /* ===== MODERN PORTFOLIO DESIGN ===== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');

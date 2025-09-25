@@ -1,4 +1,103 @@
 /**
+ * Mobile Restriction Script
+ * Prevents access on mobile phones while allowing iPads and larger devices
+ */
+function isMobileDevice() {
+    // Check for iPad first
+    const isIPad = /Macintosh/.test(navigator.userAgent) && 'ontouchend' in document;
+    if (isIPad) return false; // Allow all iPads
+    
+    // Check for other mobile devices
+    const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth < 1024; // Increased to catch all tablets
+    const isIOS = /iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isAndroid = /Android/.test(navigator.userAgent);
+    
+    // Return true only for phones (not tablets)
+    return (isIOS || isAndroid) && isSmallScreen && hasTouchScreen;
+}
+
+function checkScreenSize() {
+    const isMobile = isMobileDevice();
+    
+    if (isMobile) {
+        // Prevent scrolling
+        document.body.style.overflow = 'hidden';
+        
+        // Create a message container if it doesn't exist
+        if (!document.getElementById('mobile-restriction-message')) {
+            const message = document.createElement('div');
+            message.id = 'mobile-restriction-message';
+            message.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+                color: #212529;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                text-align: center;
+                z-index: 9999;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                font-size: 1.2rem;
+                line-height: 1.6;
+            `;
+            
+            message.innerHTML = `
+                <div style="max-width: 600px; margin: 0 auto; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">📱</div>
+                    <h2 style="color: #0ea5e9; margin-bottom: 1rem; font-size: 1.8rem; font-weight: 700;">Mobile Phone Detected</h2>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: #333; line-height: 1.6;">
+                        This website is not optimized for mobile phones.
+                    </p>
+                    <div style="background: #f0f7ff; padding: 1rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #0ea5e9;">
+                        <p style="margin: 0; font-weight: 500; color: #0c4a6e;">
+                            <span style="display: inline-block; margin-right: 8px;">ℹ️</span>
+                            Please use an iPad, laptop, or desktop computer to access this website.
+                        </p>
+                    </div>
+                    <p style="margin: 1.5rem 0; color: #495057; font-size: 0.95rem;">
+                        <strong>Supported devices:</strong> iPad (all models), Laptops, Desktop computers
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">💻</div>
+                            <span style="font-size: 0.9rem; color: #4b5563;">Laptop/Desktop</span>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+                                <span style="display: inline-block; animation: bounce 2s infinite;">📱</span>
+                            </div>
+                            <span style="font-size: 0.9rem; color: #4b5563;">iPad</span>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    @keyframes bounce {
+                        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                        40% { transform: translateY(-20px); }
+                        60% { transform: translateY(-10px); }
+                    }
+                </style>
+            `;
+            
+            // Clear the body and add the message
+            document.body.innerHTML = '';
+            document.body.appendChild(message);
+        }
+    }
+}
+
+// Run on load and on resize
+window.addEventListener('load', checkScreenSize);
+window.addEventListener('resize', checkScreenSize);
+
+/**
  * Modern Portfolio Website JavaScript
  * Enhanced with modern ES6+ features, performance optimizations, and accessibility
  */
