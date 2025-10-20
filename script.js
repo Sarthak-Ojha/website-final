@@ -1,555 +1,78 @@
-/**
- * Mobile Restriction Script
- * Prevents access on mobile phones while allowing iPads and larger devices
- */
-function isMobileDevice() {
-    // Check for iPad first
-    const isIPad = /Macintosh/.test(navigator.userAgent) && 'ontouchend' in document;
-    if (isIPad) return false; // Allow all iPads
-    
-    // Check for other mobile devices
-    const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const isSmallScreen = window.innerWidth < 1024; // Increased to catch all tablets
-    const isIOS = /iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const isAndroid = /Android/.test(navigator.userAgent);
-    
-    // Return true only for phones (not tablets)
-    return (isIOS || isAndroid) && isSmallScreen && hasTouchScreen;
-}
-
-function checkScreenSize() {
-    const isMobile = isMobileDevice();
-    
-    if (isMobile) {
-        // Prevent scrolling
-        document.body.style.overflow = 'hidden';
-        
-        // Create a message container if it doesn't exist
-        if (!document.getElementById('mobile-restriction-message')) {
-            const message = document.createElement('div');
-            message.id = 'mobile-restriction-message';
-            message.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-                color: #212529;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 2rem;
-                text-align: center;
-                z-index: 9999;
-                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                font-size: 1.2rem;
-                line-height: 1.6;
-            `;
-            
-            message.innerHTML = `
-                <div style="max-width: 600px; margin: 0 auto; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">📱</div>
-                    <h2 style="color: #0ea5e9; margin-bottom: 1rem; font-size: 1.8rem; font-weight: 700;">Mobile Phone Detected</h2>
-                    <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: #333; line-height: 1.6;">
-                        This website is not optimized for mobile phones.
-                    </p>
-                    <div style="background: #f0f7ff; padding: 1rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #0ea5e9;">
-                        <p style="margin: 0; font-weight: 500; color: #0c4a6e;">
-                            <span style="display: inline-block; margin-right: 8px;">ℹ️</span>
-                            Please use an iPad, laptop, or desktop computer to access this website.
-                        </p>
-                    </div>
-                    <p style="margin: 1.5rem 0; color: #495057; font-size: 0.95rem;">
-                        <strong>Supported devices:</strong> iPad (all models), Laptops, Desktop computers
-                    </p>
-                    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">💻</div>
-                            <span style="font-size: 0.9rem; color: #4b5563;">Laptop/Desktop</span>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">
-                                <span style="display: inline-block; animation: bounce 2s infinite;">📱</span>
-                            </div>
-                            <span style="font-size: 0.9rem; color: #4b5563;">iPad</span>
-                        </div>
-                    </div>
-                </div>
-                <style>
-                    @keyframes bounce {
-                        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-                        40% { transform: translateY(-20px); }
-                        60% { transform: translateY(-10px); }
-                    }
-                </style>
-            `;
-            
-            // Clear the body and add the message
-            document.body.innerHTML = '';
-            document.body.appendChild(message);
-        }
-    }
-}
-
-// Run on load and on resize
-window.addEventListener('load', checkScreenSize);
-window.addEventListener('resize', checkScreenSize);
-
-/**
- * Modern Portfolio Website JavaScript
- * Enhanced with modern ES6+ features, performance optimizations, and accessibility
- */
-
-class ModernPortfolio {
-    constructor() {
-        this.state = {
-            isMenuOpen: false,
-            isDarkMode: this.getStoredTheme() === 'dark',
-            scrollY: 0,
-            isScrolling: false
-        };
-        
-        this.elements = {};
-        this.observers = new Map();
-        this.rafId = null;
-        
-        this.init();
-    }
-
-    async init() {
-        await this.waitForDOM();
-        this.cacheElements();
-        this.setupEventListeners();
-        this.initializeComponents();
-        this.initializeAnimations();
-    }
-
-    waitForDOM() {
-        return new Promise(resolve => {
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', resolve);
-            } else {
-                resolve();
-            }
-        });
-    }
-
-    cacheElements() {
-        this.elements = {
-            header: document.querySelector('.header'),
-            navToggle: document.querySelector('.nav-toggle'),
-            navMenu: document.querySelector('.nav-menu'),
-            navLinks: document.querySelectorAll('.nav-link'),
-            sections: document.querySelectorAll('section[id]'),
-            backToTop: document.querySelector('#backToTop'),
-            heroStats: document.querySelectorAll('.stat-number'),
-            floatingCards: document.querySelectorAll('.floating-card'),
-            typingElement: document.querySelector('.typing-text')
-        };
-    }
-
-    setupEventListeners() {
-        // Optimized scroll handler with RAF
-        this.handleScroll = this.throttle(() => {
-            this.updateScrollState();
-        }, 16);
-
-        // Event listeners with proper cleanup
-        window.addEventListener('scroll', this.handleScroll, { passive: true });
-        window.addEventListener('resize', this.debounce(this.handleResize.bind(this), 250));
-        
-        // Navigation
-        this.initializeNavigation();
-        this.initializeMobileMenu();
-        this.initializeSmoothScrolling();
-        this.initializeBackToTop();
-    }
-
-    // Utility functions
-    throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
-
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    getStoredTheme() {
-        return localStorage.getItem('theme') || 
-               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    }
-
-    setStoredTheme(theme) {
-        localStorage.setItem('theme', theme);
-    }
-
-    initializeNavigation() {
-        if (!this.elements.header) return;
-
-        // Initialize Lucide icons
-        this.initializeLucideIcons();
-        
-        // Set up intersection observer for active nav links
-        this.setupNavIntersectionObserver();
-    }
-
-    async initializeLucideIcons() {
-        try {
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            } else {
-                // Load Lucide dynamically if not available
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js';
-                script.onload = () => lucide.createIcons();
-                document.head.appendChild(script);
-            }
-        } catch (error) {
-            console.warn('Lucide icons could not be loaded:', error);
-        }
-    }
-
-    setupNavIntersectionObserver() {
-        const options = {
-            rootMargin: '-50% 0px -50% 0px',
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.updateActiveNavLink(entry.target.id);
-                }
-            });
-        }, options);
-
-        this.elements.sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        this.observers.set('navigation', observer);
-    }
-
-    updateActiveNavLink(activeId) {
-        this.elements.navLinks.forEach(link => {
-            const isActive = link.getAttribute('data-section') === activeId;
-            link.classList.toggle('active', isActive);
-        });
-    }
-
-    updateScrollState() {
-        this.state.scrollY = window.scrollY;
-        
-        // Update header state
-        if (this.elements.header) {
-            this.elements.header.classList.toggle('scrolled', this.state.scrollY > 50);
-        }
-        
-        // Update back to top button
-        if (this.elements.backToTop) {
-            this.elements.backToTop.classList.toggle('visible', this.state.scrollY > 300);
-        }
-    }
-
-    handleResize() {
-        // Close mobile menu on resize to desktop
-        if (window.innerWidth >= 768 && this.state.isMenuOpen) {
-            this.closeMobileMenu();
-        }
-    }
-
-    initializeSmoothScrolling() {
-        const links = document.querySelectorAll('a[href^="#"]');
-        
-        links.forEach(link => {
-            link.addEventListener('click', this.handleSmoothScroll.bind(this));
-        });
-    }
-
-    handleSmoothScroll(e) {
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const targetId = e.currentTarget.getAttribute('href');
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
         const targetElement = document.querySelector(targetId);
-        
         if (targetElement) {
-            const headerHeight = this.elements.header?.offsetHeight || 80;
-            const targetPosition = targetElement.offsetTop - headerHeight;
-            
             // Close mobile menu if open
-            if (this.state.isMenuOpen) {
-                this.closeMobileMenu();
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            if (navToggle && navMenu) {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
             
+            // Scroll to the target section
             window.scrollTo({
-                top: targetPosition,
+                top: targetElement.offsetTop - 80, // Adjust for fixed header
                 behavior: 'smooth'
             });
+            
+            // Update URL without page jump
+            history.pushState(null, null, targetId);
         }
-    }
+    });
+});
 
-    initializeMobileMenu() {
-        if (!this.elements.navToggle || !this.elements.navMenu) return;
+// Mobile menu toggle
+const navToggle = document.querySelector('.nav-toggle');
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', !isExpanded);
+        document.querySelector('.nav-menu').classList.toggle('active');
+        document.body.style.overflow = isExpanded ? '' : 'hidden';
+    });
+}
 
-        // Toggle mobile menu
-        this.elements.navToggle.addEventListener('click', this.toggleMobileMenu.bind(this));
-
-        // Close menu when clicking nav links
-        this.elements.navLinks.forEach(link => {
-            link.addEventListener('click', this.closeMobileMenu.bind(this));
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (this.state.isMenuOpen && 
-                !this.elements.navToggle.contains(e.target) && 
-                !this.elements.navMenu.contains(e.target)) {
-                this.closeMobileMenu();
-            }
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.state.isMenuOpen) {
-                this.closeMobileMenu();
-            }
-        });
-    }
-
-    toggleMobileMenu() {
-        this.state.isMenuOpen = !this.state.isMenuOpen;
+// Close mobile menu when clicking outside
+window.addEventListener('click', (e) => {
+    const navMenu = document.querySelector('.nav-menu');
+    const navToggle = document.querySelector('.nav-toggle');
+    
+    if (navMenu && navToggle && 
+        !navMenu.contains(e.target) && 
+        !navToggle.contains(e.target) &&
+        navMenu.classList.contains('active')) {
         
-        this.elements.navMenu.classList.toggle('active', this.state.isMenuOpen);
-        this.elements.navToggle.classList.toggle('active', this.state.isMenuOpen);
-        this.elements.navToggle.setAttribute('aria-expanded', this.state.isMenuOpen);
-        
-        // Prevent body scroll when menu is open
-        document.body.style.overflow = this.state.isMenuOpen ? 'hidden' : '';
-    }
-
-    closeMobileMenu() {
-        if (!this.state.isMenuOpen) return;
-        
-        this.state.isMenuOpen = false;
-        this.elements.navMenu.classList.remove('active');
-        this.elements.navToggle.classList.remove('active');
-        this.elements.navToggle.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
-    }
-
-    initializeBackToTop() {
-        if (!this.elements.backToTop) return;
-
-        this.elements.backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-
-    initializeThemeToggle() {
-        if (!this.elements.themeToggle) return;
-
-        this.elements.themeToggle.addEventListener('click', this.toggleTheme.bind(this));
-        
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme')) {
-                this.state.isDarkMode = e.matches;
-                this.applyTheme();
-            }
-        });
-    }
-
-    toggleTheme() {
-        this.state.isDarkMode = !this.state.isDarkMode;
-        this.setStoredTheme(this.state.isDarkMode ? 'dark' : 'light');
-        this.applyTheme();
-    }
-
-    applyTheme() {
-        document.documentElement.setAttribute('data-theme', this.state.isDarkMode ? 'dark' : 'light');
-    }
-
-    initializeComponents() {
-        // Initialize stats counter animation
-        this.initializeStatsCounter();
-        
-        // Initialize typing animation for hero title
-        this.initializeTypingAnimation();
-        
-        // Initialize scroll-triggered animations
-        this.initializeScrollAnimations();
-    }
-
-    initializeStatsCounter() {
-        const options = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.animateCounter(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, options);
-
-        this.elements.heroStats.forEach(stat => {
-            observer.observe(stat);
-        });
-
-        this.observers.set('stats', observer);
-    }
-
-    animateCounter(element) {
-        const numberElement = element.querySelector('.stat-number');
-        if (!numberElement) return;
-
-        const finalNumber = parseInt(numberElement.textContent.replace(/\D/g, ''));
-        const duration = 2000;
-        const increment = finalNumber / (duration / 16);
-        let current = 0;
-
-        const updateCounter = () => {
-            current += increment;
-            if (current < finalNumber) {
-                numberElement.textContent = Math.floor(current) + (numberElement.textContent.includes('+') ? '+' : '');
-                requestAnimationFrame(updateCounter);
-            } else {
-                numberElement.textContent = finalNumber + (numberElement.textContent.includes('+') ? '+' : '');
-            }
-        };
-
-        updateCounter();
-    }
-
-    initializeTypingAnimation() {
-        const titleRole = document.querySelector('.title-role');
-        if (!titleRole) return;
-
-        const roles = ['Full-Stack Developer', 'Problem Solver', 'Tech Innovator', 'World Record Holder'];
-        let currentRole = 0;
-        let currentChar = 0;
-        let isDeleting = false;
-
-        const typeWriter = () => {
-            const current = roles[currentRole];
-            
-            if (isDeleting) {
-                titleRole.textContent = current.substring(0, currentChar - 1);
-                currentChar--;
-            } else {
-                titleRole.textContent = current.substring(0, currentChar + 1);
-                currentChar++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && currentChar === current.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && currentChar === 0) {
-                isDeleting = false;
-                currentRole = (currentRole + 1) % roles.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(typeWriter, typeSpeed);
-        };
-
-        // Start typing animation after a delay
-        setTimeout(typeWriter, 1000);
-    }
-
-    initializeScrollAnimations() {
-        const options = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in-up');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, options);
-
-        // Observe elements that should animate in
-        const animateElements = document.querySelectorAll('.stat-item, .floating-card, .hero-badge');
-        animateElements.forEach(el => observer.observe(el));
-
-        this.observers.set('scroll', observer);
-    }
-
-    initializeAnimations() {
-        // Add staggered animation delays to stats
-        this.elements.heroStats.forEach((stat, index) => {
-            stat.style.animationDelay = `${index * 100}ms`;
-        });
-
-        // Add floating animation to cards
-        this.elements.floatingCards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 2}s`;
-        });
-    }
-
-    // Cleanup method for when the app is destroyed
-    destroy() {
-        // Cancel any pending RAF
-        if (this.rafId) {
-            cancelAnimationFrame(this.rafId);
-        }
-
-        // Disconnect all observers
-        this.observers.forEach(observer => observer.disconnect());
-        this.observers.clear();
-
-        // Remove event listeners
-        window.removeEventListener('scroll', this.handleScroll);
-        window.removeEventListener('resize', this.handleResize);
-    }
-}
-
-// Initialize the modern portfolio application
-const portfolio = new ModernPortfolio();
-
-// Export for potential external use
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = ModernPortfolio;
-}
-
-// Handle page visibility changes for performance
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        // Pause animations when page is hidden
-        document.documentElement.style.setProperty('--animation-play-state', 'paused');
-    } else {
-        // Resume animations when page is visible
-        document.documentElement.style.setProperty('--animation-play-state', 'running');
     }
 });
 
+// Active link highlighting
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+            current = '#' + section.getAttribute('id');
+        }
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === current) {
+            link.classList.add('active');
+        }
+    });
+});
