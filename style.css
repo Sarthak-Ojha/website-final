@@ -266,7 +266,6 @@ section {
 
 .profile-rectangle {
     width: 350px;
-    height: 350px;
     overflow: hidden;
 }
 
@@ -297,7 +296,6 @@ section {
     
     .profile-rectangle {
         width: 280px;
-        height: 360px;
     }
     
     .about-stats {
@@ -1662,6 +1660,35 @@ section {
 @media (max-width: 768px) {
     .nav-menu {
         display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-menu li {
+        margin: 0.5rem 0;
+    }
+    
+    .nav-menu .nav-link {
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-menu .nav-link:hover {
+        background: var(--primary);
+        color: white;
     }
     
     .nav-toggle {
